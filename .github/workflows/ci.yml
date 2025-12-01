@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  quality-check:
+    name: 🛡️ Quality Gate
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v6
+
+    - name: Setup Bun
+      uses: oven-sh/setup-bun@v2
+      with:
+        bun-version: latest
+
+    - name: Install dependencies
+      run: bun install --frozen-lockfile
+
+    - name: Check Formatting & Linting
+      run: bun run lint
+
+    - name: Typecheck
+      run: bun run typecheck
+
+    - name: Build Test
+      run: bun run build

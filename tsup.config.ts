@@ -1,11 +1,13 @@
 import { defineConfig } from 'tsup'
 
 export default defineConfig({
-	dts: true,
 	entry: ['src/index.ts'],
 	format: ['cjs', 'esm'],
-	minify: true,
-	outDir: 'dist/',
+	outDir: 'dist',
+	dts: true,
 	sourcemap: true,
+	minify: false,
 	splitting: false,
+	clean: true,
+	external: ['discord.js'],
 })
