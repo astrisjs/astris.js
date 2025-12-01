@@ -1,5 +1,8 @@
 node_modules/
 src/
+assets/
+.vscode/
+.github/
 .gitignore
 biome.json
 bun.lock
