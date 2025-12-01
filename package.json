@@ -1,0 +1,25 @@
+{
+	"dependencies": {
+		"discord.js": "^14.25.1"
+	},
+	"description": "Build powerful applications. The star of your Discord stack.",
+	"devDependencies": {
+		"@biomejs/biome": "2.3.8",
+		"@types/bun": "latest",
+		"tsup": "^8.5.1"
+	},
+	"homepage": "https://github.com/astrisjs/astris.js#homepage",
+	"license": "GPL-3.0-only",
+	"name": "astris.js",
+	"peerDependencies": {
+		"typescript": "^5"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/astrisjs/astris.js.git"
+	},
+	"scripts": {
+		"build": "tsup"
+	},
+	"version": "0.0.1"
+}
