@@ -1,8 +1,8 @@
 import test from 'ava'
+import { BotEngine } from '../index'
 
-import { plus100 } from '../index'
+test('create a fake bot engine', (t) => {
+  const bot = new BotEngine('AstrisBot')
 
-test('sync function from native code', (t) => {
-  const fixture = 42
-  t.is(plus100(fixture), fixture + 100)
+  t.true(bot instanceof BotEngine)
 })
