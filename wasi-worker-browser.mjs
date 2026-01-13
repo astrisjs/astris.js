@@ -31,6 +31,6 @@ const handler = new MessageHandler({
 	},
 });
 
-globalThis.onmessage = function (e) {
+globalThis.onmessage = (e) => {
 	handler.handle(e);
 };
