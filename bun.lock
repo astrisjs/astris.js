@@ -21,8 +21,18 @@
         "tinybench": "^6.0.0",
         "typescript": "^5.9.2",
       },
+      "optionalDependencies": {
+        "astrisjs-darwin-arm64": "1.0.0",
+        "astrisjs-darwin-x64": "1.0.0",
+        "astrisjs-linux-x64-gnu": "1.0.0",
+        "astrisjs-win32-x64-msvc": "1.0.0",
+      },
     },
   },
+  "trustedDependencies": [
+    "oxlint",
+    "@oxc-node/core",
+  ],
   "packages": {
     "@emnapi/core": ["@emnapi/core@1.8.1", "", { "dependencies": { "@emnapi/wasi-threads": "1.1.0", "tslib": "^2.4.0" } }, "sha512-AvT9QFpxK0Zd8J0jopedNm+w/2fIzvtPKPjqyw9jwvBaReTTqPBk9Hixaz7KbjimP+QNz605/XnjFcDAL2pqBg=="],
 

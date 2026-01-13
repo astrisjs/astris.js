@@ -115,5 +115,9 @@
     "astrisjs-darwin-x64": "1.0.0",
     "astrisjs-linux-x64-gnu": "1.0.0",
     "astrisjs-darwin-arm64": "1.0.0"
-  }
+  },
+  "trustedDependencies": [
+    "@oxc-node/core",
+    "oxlint"
+  ]
 }
