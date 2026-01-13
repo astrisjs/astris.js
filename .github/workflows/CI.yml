@@ -36,7 +36,7 @@ jobs:
       - name: Install dependencies
         run: bun install
       - name: Biome Lint
-        run: bun run lin
+        run: bun run lint
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
         with:
