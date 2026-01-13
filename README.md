@@ -1,13 +1,13 @@
 <div align="center">
   <img src="./assets/banner.png" alt="AstrisJS Logo" />
 
-  # AstrisJS
+# AstrisJS
 
-  **Build powerful applications. The star of your Discord stack.**
+  **Native performance. TypeScript ergonomics. The next-gen Discord framework.**
 
   [![NPM Version](https://img.shields.io/npm/v/astris.js?style=flat-square&color=blue)](https://www.npmjs.com/package/astris.js)
   [![License](https://img.shields.io/npm/l/astris.js?style=flat-square)](LICENSE)
-  [![CI Status](https://img.shields.io/github/actions/workflow/status/astrisjs/astris.js/ci.yml?style=flat-square&label=ci)](https://github.com/astrisjs/astris.js/actions)
+  [![CI Status](https://img.shields.io/github/actions/workflow/status/astrisjs/astris.js/CI.yml?style=flat-square&label=ci)](https://github.com/astrisjs/astris.js/actions)
 
 </div>
 
@@ -15,22 +15,23 @@
 
 ## 🌌 Overview
 
-**AstrisJS** is a next-generation framework built on top of [discord.js](https://discord.js.org/), designed to provide a robust, scalable, and type-safe structure for your Discord applications.
+**AstrisJS** is a high-performance Discord framework powered by a **Rust** core, exposed to Node.js and Bun via **N-API**.
 
-Born from the need for a more structured way to build bots, AstrisJS handles the heavy lifting of command management, event handling, and modular architecture, letting you focus on creating unique features.
+Unlike traditional frameworks that run entirely in JavaScript, AstrisJS offloads heavy operations (Gateway management, Sharding, Caching, Voice encoding) to native code. This results in incredibly low memory usage and instant startup times, while keeping your application logic in the TypeScript/JavaScript you already know and love.
 
 ### ✨ Key Features
 
-- **TypeScript First:** Built with TypeScript for TypeScript. Enjoy full type safety and amazing IntelliSense.
-- **Modern Stack:** Optimized for **Bun** runtime, but fully compatible with Node.js.
-- **Hybrid Support:** Works seamlessly with both ESM (`import`) and CommonJS (`require`).
-- **Scalable Architecture:** Opinionated structures for Commands and Events to keep your codebase clean.
+- **🚀 Rust Powered:** The core engine is written in Rust, offering near-zero overhead and superior concurrency.
+- **⚡ Blazing Fast:** Utilizing system threads for WebSocket management instead of the Node.js Event Loop.
+- **🛡️ TypeScript First:** Full type safety with auto-generated definitions. No manual typings required.
+- **📦 Zero-Cost Abstraction:** Use it like a normal JS library (`npm install`), run it with native performance.
+- **🏗️ Modern Architecture:** Designed for the **Bun** runtime but fully compatible with Node.js.
 
 ---
 
 ## 📦 Installation
 
-AstrisJS is available via NPM. We recommend using **Bun** for the best experience.
+AstrisJS is distributed as a native Node.js addon. It works out of the box without needing to install Rust on your machine.
 
 ```bash
 # Using Bun (Recommended)
@@ -41,39 +42,75 @@ npm install astris.js
 
 # Using yarn
 yarn add astris.js
-
-# Using pnpm
-pnpm add astris.js
 ```
 
 ## 🚀 Quick Start
 
-Here is a simple example of how to initialize your client using AstrisJS:
+Initialize the native engine and start listening to events with just a few lines of code.
 
-> [!WARNING]
-> Coming soon...
+```ts
+import { BotEngine } from 'astris.js';
+
+// 1. Initialize the Rust Core
+const bot = new BotEngine("MyBotToken");
+
+console.log("Connecting to Gateway...");
+
+// 2. Hook into the native event stream
+// The callback runs in the JS thread, but is triggered by the Rust thread
+bot.connect((err, event) => {
+  if (err) {
+    console.error("Gateway Error:", err);
+    return;
+  }
+
+  console.log(`Received Event: ${event.type}`);
+
+  if (event.content === '!ping') {
+    console.log('Pong!');
+  }
+});
+```
 
 ## 🗺️ Roadmap
-We are currently in the Alpha stage (v0.0.x).
 
-- [x] TypeScript & Bundler Infrastructure
-- [ ] Core Client Implementation
-- [ ] Command Handler (Slash Commands)
-- [ ] Event Handler (Auto-loading events)
-- [ ] Plugin System support
-- [ ] Database Adapters
+We are currently in the Alpha stage. The core binding infrastructure is ready, and we are porting features.
+
+- [ ] Core: N-API Bindings & CI/CD Pipeline
+- [ ] Runtime: Thread-safe communication (Rust ↔ JS)
+- [ ] Gateway: Full WebSocket connection implementation
+- [ ] Cache: Native in-memory caching (Rust Structs)
+- [ ] Handlers: Command & Event interaction wrappers
+- [ ] Voice: Native Opus encoding
 
 ## 🤝 Contributing
 
-Contributions are welcome! Whether it's a bug fix, a new feature, or documentation improvements.
+Contributions are welcome! Since this is a hybrid project, you will need both Node.js/Bun and Rust installed.
+
+### Prerequisites
+
+- Rust & Cargo (Latest Stable)
+- Bun (v1.0+)
+
+### Setup
 
 1. Fork the project.
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`).
-3. Commit your changes (`git commit -m 'feat: add some amazing feature'`).
-4. Push to the Branch (`git push origin feature/AmazingFeature`).
-5. Open a Pull Request.
+2. Clone your fork.
+3. Install dependencies and build the bindings:
 
-Please make sure to run `bun run lint` and `bun run typecheck` before pushing.
+```bash
+# Install JS dependencies
+bun install
+
+# Compile the Rust Core (takes a moment)
+bun run build
+```
+
+4. Create your Feature Branch (git checkout -b feature/AmazingFeature).
+5. Commit your changes.
+6. Open a Pull Request.
+
+Please make sure to run `bun run test` to verify the bindings before pushing.
 
 ## 📄 License
 

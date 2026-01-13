@@ -1,6 +1,6 @@
 {
   "name": "astrisjs",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "Build powerful applications. The star of your Discord stack.",
   "main": "index.js",
   "repository": {
