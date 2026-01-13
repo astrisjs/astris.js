@@ -160,7 +160,7 @@ jobs:
         run: ls -R .
         shell: bash
       - name: Test bindings
-        run: bun test
+        run: bun run test
 
   test-linux-binding:
     name: Test ${{ matrix.target }} - node@${{ matrix.node }}
