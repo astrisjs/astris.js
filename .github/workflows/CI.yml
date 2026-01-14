@@ -86,10 +86,10 @@ jobs:
             .cargo-cache
             target/
           key: ${{ matrix.settings.target }}-cargo-${{ matrix.settings.host }}
-      - uses: https://codeberg.org/mlugg/setup-zig@v2
+      - uses: mlugg/setup-zig@v2
         if: ${{ contains(matrix.settings.target, 'unknown-linux') }}
         with:
-          version: 0.14.1
+          version: 0.15.2
       - name: Install dependencies
         run: bun install
       - name: Build
