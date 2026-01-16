@@ -6,7 +6,7 @@ if (!token) throw new Error("Invalid token!")
 
 const bot = new BotEngine(token)
 
-bot.connect((err, rawEvent) => {
+bot.login(null, (err, rawEvent) => {
     if (err) return console.error("Erro Fatal:", err);
 
     console.log(rawEvent)

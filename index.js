@@ -577,3 +577,4 @@ if (!nativeBinding) {
 
 module.exports = nativeBinding
 module.exports.BotEngine = nativeBinding.BotEngine
+module.exports.GatewayClient = nativeBinding.GatewayClient
