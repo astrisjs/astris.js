@@ -14,7 +14,6 @@ use tokio_tungstenite::{connect_async, tungstenite::Message};
 
 use crate::{
     gateway::packet::{
-        self,
         heartbeat::HeartbeatPacketData,
         hello::HelloPacketData,
         identify::{ConnectionProperties, IdentifyPacketData},
