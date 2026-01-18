@@ -7,3 +7,4 @@ edition = "2024"
 clap = { version = "4.5.54", features = ["derive", "cargo", "wrap_help"] }
 owo-colors = "4.2.3"
 which = "8.0.0"
+astrisjs_runtime = { path = "../astrisjs_runtime" }

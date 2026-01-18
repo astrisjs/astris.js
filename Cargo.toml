@@ -1,6 +1,6 @@
 [workspace]
 resolver = "2"
-members = ["crates/astrisjs_core", "crates/astrisjs_cli"]
+members = ["crates/astrisjs_core", "crates/astrisjs_cli", "crates/astrisjs_runtime"]
 
 [profile.release]
 lto = true
