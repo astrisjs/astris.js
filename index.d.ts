@@ -6,6 +6,7 @@ export declare class BotEngine {
 }
 
 export declare class GatewayClient {
+  token: string
   constructor()
   connect(callback: ((err: Error | null, arg: string) => void)): void
 }

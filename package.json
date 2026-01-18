@@ -1,7 +1,7 @@
 {
-  "name": "astrisjs",
+  "name": "astris.js",
   "version": "0.0.0",
-  "description": "Build powerful applications. The star of your Discord stack.",
+  "description": "A blazingly fast Discord Bot Framework",
   "main": "index.js",
   "repository": {
     "type": "git",
@@ -45,16 +45,16 @@
     "access": "public"
   },
   "scripts": {
-    "artifacts": "napi artifacts",
-    "build": "napi build --platform --release",
-    "build:debug": "napi build --platform",
-    "format": "run-p format:js format:rs format:toml",
+    "artifacts": "napi artifacts --manifest-path ./crates/astrisjs_core/Cargo.toml --ls .",
+    "build": "napi build --platform --release --manifest-path ./crates/astrisjs_core/Cargo.toml --ls .",
+    "build:debug": "napi build --platform --manifest-path ./crates/astrisjs_core/Cargo.toml --ls .",
+    "format": "run-p format:js format:rs",
     "format:js": "biome format --write .",
     "format:rs": "cargo fmt",
     "lint": "biome lint .",
     "prepublishOnly": "napi prepublish -t npm",
-    "preversion": "napi build --platform && git add .",
-    "version": "napi version"
+    "preversion": "napi build --platform --manifest-path ./crates/astrisjs_core/Cargo.toml --ls . && git add .",
+    "version": "napi version --manifest-path ./crates/astrisjs_core/Cargo.toml --ls ."
   },
   "devDependencies": {
     "@biomejs/biome": "^2.3.11",
