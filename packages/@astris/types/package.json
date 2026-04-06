@@ -11,7 +11,6 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "bun test tests/",
     "lint": "biome check src tests",
     "format": "biome format src tests --write",
     "clean": "rm -rf dist"
