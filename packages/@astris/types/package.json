@@ -1,0 +1,37 @@
+{
+  "name": "@astris/types",
+  "version": "0.1.0",
+  "description": "Type definitions for AstrisJS framework.",
+  "type": "module",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "bun tsc",
+    "test": "bun test tests/",
+    "lint": "biome check src tests",
+    "format": "biome format src tests --write",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "bun",
+    "fullstack",
+    "ssr",
+    "spa",
+    "framework"
+  ],
+  "author": {
+    "name": "Eric Freitas",
+    "email": "contato@freitaseric.com",
+    "url": "https://freitaseric.com"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@types/bun": "^1.1.0",
+    "@types/node": "^25.5.2",
+    "typescript": "^6.0.2"
+  }
+}
