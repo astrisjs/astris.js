@@ -60,11 +60,10 @@ export async function scanRoutes(routesDir: string): Promise<ScanResult> {
   const routeMap = new Map<string, { page?: string; api?: string }>()
 
   for (const filePath of files) {
-    if (
-      (!filePath.endsWith('page.tsx') || !filePath.endsWith('page.jsx')) &&
-      (!filePath.endsWith('route.ts') || !filePath.endsWith('route.js'))
-    )
-      continue
+    const isPage = filePath.endsWith('page.tsx') || filePath.endsWith('page.jsx')
+    const isApi = filePath.endsWith('route.ts') || filePath.endsWith('route.js')
+
+    if (!isPage && !isApi) continue
 
     const routePath = extractRoutePath(filePath, routesDir)
     if (!routePath) continue
@@ -75,29 +74,29 @@ export async function scanRoutes(routesDir: string): Promise<ScanResult> {
 
     const entry = routeMap.get(routePath)
     if (!entry) {
-      result.errors.push(`Unable to locale entry: ${entry}`)
+      result.errors.push(`Unable to locate entry: ${entry}`)
       continue
     }
-    if (filePath.endsWith('page.tsx') || filePath.endsWith('page.jsx')) {
+    if (isPage) {
       entry.page = filePath
-    } else if (filePath.endsWith('route.ts') || filePath.endsWith('route.js')) {
+    } else if (isApi) {
       entry.api = filePath
     }
+  }
 
-    for (const [path, { page, api }] of routeMap.entries()) {
-      if (!page && !api) continue
+  for (const [path, { page, api }] of routeMap.entries()) {
+    if (!page && !api) continue
 
-      const params = extractParams(path)
+    const params = extractParams(path)
 
-      result.routes.push({
-        path,
-        pageFile: page,
-        apiFile: api,
-        params,
-        isDynamic: isDynamicRoute(path),
-        isCatchAll: isCatchAllRoute(path),
-      })
-    }
+    result.routes.push({
+      path,
+      pageFile: page,
+      apiFile: api,
+      params,
+      isDynamic: isDynamicRoute(path),
+      isCatchAll: isCatchAllRoute(path),
+    })
   }
 
   return result

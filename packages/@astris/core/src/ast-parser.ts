@@ -57,10 +57,7 @@ export async function parseRoute(filePath: string): Promise<ParsedRoute> {
 
   for (const method of httpMethods) {
     if (functions.includes(method)) {
-      result.methods[method as keyof ParsedRoute['methods']] = findTypesForMethod(
-        method,
-        types
-      )
+      result.methods[method as keyof ParsedRoute['methods']] = findTypesForMethod(method, types)
     }
   }
 

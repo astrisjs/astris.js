@@ -28,12 +28,13 @@ export class Router {
   }
 
   private patternToRegex(pattern: string): RegExp {
-    let regex = pattern.replace(/[.+?${}()|]/g, '\\$&').replace(/\\/g, '\\\\')
+    let regex = pattern
+      .replace(/\[\.\.\.(\w+)\]/g, '(?<$1>.+)')
+      .replace(/\[(\w+)\]/g, '(?<$1>[^/]+)')
 
-    regex = regex.replace(/\\\[(\w+)\\\]/g, '(?<$1>[^/]+)')
-    regex = regex.replace(/\\\[\\\.\\\.\\\. (\w+)\\\]/g, '(?<$1>.+)')
+    regex = regex.replace(/\./g, '\\.')
 
-    return new RegExp(`^${regex}`)
+    return new RegExp(`^${regex}$`)
   }
 
   private extractParams(
@@ -43,7 +44,9 @@ export class Router {
     const regex = this.patternToRegex(pattern)
     const match = regex.exec(pathname)
 
-    if (!match?.groups) return null
+    if (!match) return null
+
+    if (!match.groups) return {}
 
     const params: Record<string, string | string[]> = {}
 

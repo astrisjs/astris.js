@@ -10,7 +10,7 @@
     }
   },
   "scripts": {
-    "build": "bun tsc",
+    "build": "tsc",
     "test": "bun test tests/",
     "lint": "biome check src tests",
     "format": "biome format src tests --write",
