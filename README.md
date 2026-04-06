@@ -4,6 +4,8 @@
 
 A modern, type-safe, and blazingly fast fullstack framework built 100% on Bun.
 
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/astrisjs/astris.js/ci.yml)
+
 [![Bun](https://img.shields.io/badge/Bun-v1.3+-black?logo=bun)](https://bun.sh)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.3+-3178c6?logo=typescript)](https://www.typescriptlang.org)
 [![License](https://img.shields.io/badge/License-MIT-green)](#license)
