@@ -1,153 +1,81 @@
 # ✨ Astris
 
-Um framework fullstack **moderno**, **rápido** e **type-safe**, construído 100% em Bun.
+**Build at the speed of light.**
 
-> **Nota:** Estamos em desenvolvimento ativo. Veja [PLANO_COMPLETO.md](./PLANO_COMPLETO.md) para o roadmap detalhado.
+A modern, type-safe, and blazingly fast fullstack framework built 100% on Bun.
 
+[![Bun](https://img.shields.io/badge/Bun-v1.3+-black?logo=bun)](https://bun.sh)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.3+-3178c6?logo=typescript)](https://www.typescriptlang.org)
+[![License](https://img.shields.io/badge/License-MIT-green)](#license)
 
-## 🎯 Visão
+## About
 
-Astris é um framework para criar **aplicações web modernas** com:
+Astris is a fullstack framework built from the ground up on Bun. It combines **automatic file-based routing**, **type-safe APIs**, **SSR + SPA hydration**, and the ability to **deploy as a native binary** — all with zero configuration.
 
-- **SSR + SPA automático** — Renderiza páginas no servidor, aplicação moderna no cliente
-- **Roteamento baseado em arquivos** — Estrutura intuitiva, como Next.js ou Remix
-- **API type-safe** — Cliente HTTP com tipos automáticos
-- **CLI completa** — `astris create`, `dev`, `build` — pronto pra usar
-- **Performance extrema** — Construído em Bun, não Node.js
-- **Binário executável nativo** — Deploy como um único arquivo
+**Features:**
+- 🚀 Blazingly fast (built on Bun, not Node.js)
+- 📁 File-based routing (intuitive and automatic)
+- 🔐 Fully type-safe (extracted from route definitions)
+- 🎯 Zero configuration (works out of the box)
+- 💾 SSR + SPA (server-side rendering with client hydration)
+- 🐍 Deploy as native binary (single executable)
 
+## Installation
 
-## 🚀 Status Atual
-
-**Fase 1-3 de 10:** Configuração de monorepo, core framework, e testes iniciais.
-
-
-## 📚 Documentação
-
-- Documentação pública em `/docs`
-- Getting started guide
-- Exemplos funcionais
-
-
-## 🏗️ Estrutura do Monorepo
-
-```
-astris/
-├── packages/
-│   ├── @astrisjs/core/          ← Framework principal (NPM)
-│   ├── create-astris-app/       ← CLI (NPM)
-│   └── example-app/             ← Exemplo funcional
-├── docs/                        ← Documentação pública
-```
-
-
-## 🛠️ Desenvolvimento
-
-### Setup
-
+**Node.js 18.0.0 or newer is required.**
 ```bash
-cd /home/claude/astris
-bun install           # Instala workspaces
-bun run build        # Build todos os packages
-bun run test         # Roda testes
+bunx @astris/cli init my-app
+cd my-app
+bun install
+bun run dev
 ```
 
-### Estrutura de Desenvolvimento
+## Example Usage
 
-```bash
-# Raiz (Turborepo)
-bun run build        # Build tudo
-bun run test         # Test tudo
-bun run lint         # Lint tudo
-bun run dev          # Dev mode em paralelo
-
-# Ou um package específico
-cd packages/@astrisjs/core
-bun run build
-bun run test
+### Create a page
+```typescript
+// src/routes/page.tsx
+export default function Home() {
+  return <h1>Welcome to Astris</h1>
+}
 ```
 
+### Create an API route
+```typescript
+// src/routes/api/hello/route.ts
+export interface HelloResponse {
+  message: string
+}
 
-## 📦 Packages
+export async function GET(): Promise<Response> {
+  return Response.json({ message: 'Hello from Astris!' })
+}
+```
 
-### `@astrisjs/core` (0.1.0)
-O framework principal:
-- Scanner de rotas (descoberta automática)
-- Router HTTP type-safe
-- Gerador de código
-- Servidor SSR + SPA
-- CLI (create, dev, build)
+### Dynamic routes
+```typescript
+// src/routes/users/[id]/page.tsx
+export default function User({ params }: { params: { id: string } }) {
+  return <h1>User {params.id}</h1>
+}
+```
 
-### `create-astris-app` (0.1.0)
-Script de criação:
-- `bun create create-astris-app meu-projeto`
-- Copia template inicial
-- Instala dependências
+## Documentation
 
-### `example-app`
-Aplicação de exemplo com rotas completas (não publicada no NPM).
+- [Getting Started](https://astris.dev/docs) (coming soon)
+- [API Reference](https://astris.dev/docs/api) (coming soon)
+- [Guides](https://astris.dev/docs/guides) (coming soon)
 
+## Contributing
 
-## 🎯 Roadmap
+Before creating an issue, please ensure that it hasn't already been reported/suggested.
 
-### v0.1 (Em Progresso)
-- [x] Estrutura de monorepo
-- [x] Core framework base
-- [ ] CLI completa (create, dev, build)
-- [ ] Template inicial
-- [ ] Exemplo funcional
-- [ ] GitHub Actions
-- [ ] Documentação
+See the [contribution guide](./CONTRIBUTING.md) if you'd like to submit a PR.
 
-### v0.2 (Próximo)
-- [ ] Publicar no NPM
-- [ ] Website oficial
-- [ ] Mais exemplos
-- [ ] Plugin system
+## Help
 
-### v1.0 (Futuro)
-- [ ] `@astrisjs/orm` — Helpers para Drizzle, Prisma, Mongoose
-- [ ] `@astrisjs/auth` — Autenticação integrada
-- [ ] `@astrisjs/deploy` — Presets (Railway, Vercel, etc)
-- [ ] Dashboard web
-- [ ] Community plugins
+If you don't understand something in the documentation, you are experiencing problems, or you just need a gentle push in the right direction, please don't hesitate to join our official [Discord Server](https://discord.gg/astris).
 
+## License
 
-## 💡 Conceito
-
-Astris é:
-
-- ✅ **Fullstack** — SSR, SPA, API tudo junto
-- ✅ **Moderno** — TypeScript strict, React 19
-- ✅ **Rápido** — Bun runtime, sem overhead
-- ✅ **Type-safe** — Tipos extraídos automaticamente
-- ✅ **Deployable** — Binário executável nativo
-- ❌ **Não é Node.js** — Bun only (por enquanto)
-- ❌ **Não é Next.js** — Arquitetura diferente, simplificada
-
-
-## 🤝 Como Contribuir
-
-Este projeto está em **desenvolvimento ativo inicial**.
-
-Se quiser acompanhar ou contribuir:
-
-1. Abra uma issue com sugestões
-2. Fork do repositório
-3. Implemente seguindo [PLANO_COMPLETO.md](./PLANO_COMPLETO.md)
-4. Faça PR
-
-## 📄 Licença
-
-MIT — Use livremente, comercial ou pessoal.
-
-## 👤 Autor
-
-**Eric** — Desenvolvedor de frameworks em Bun
-
-## 🔗 Links
-
-- [Bun](https://bun.sh) — Runtime JavaScript/TypeScript ultrarrápido
-- [React](https://react.dev) — Biblioteca de UI
-- [Turborepo](https://turbo.build) — Orquestração de monorepo
-- [TypeScript](https://www.typescriptlang.org) — Type safety
+Licensed under the [MIT License](./LICENSE)
