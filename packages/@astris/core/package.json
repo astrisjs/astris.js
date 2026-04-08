@@ -12,7 +12,7 @@
     }
   },
   "scripts": {
-    "build": "bun build src/index.ts --outdir dist --format=esm --target=bun --minify --sourcemap=linked",
+    "build": "bun build src/index.ts --outdir dist --format=esm --target=bun --minify --sourcemap=linked && bunx dts-bundle-generator -o dist/index.d.ts src/index.ts",
     "test": "bun test tests/",
     "lint": "biome check src tests",
     "format": "biome format src tests --write",
@@ -31,15 +31,9 @@
     "url": "https://freitaseric.com"
   },
   "license": "MIT",
-  "dependencies": {
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "@astris/types": "workspace:*",
     "@types/bun": "^1.1.0",
-    "@types/node": "^25.5.2",
-    "@types/react": "^19.2.14",
-    "@types/react-dom": "^19.2.3"
+    "@types/node": "^25.5.2"
   }
 }

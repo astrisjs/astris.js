@@ -4,6 +4,6 @@ export { parseRoute } from './ast-parser'
 export { generateApiClient, generateRoutesRegistry } from './codegen'
 export { Router } from './router'
 export { scanRoutes } from './scanner'
-export { createServer } from './server'
+export type * from './types'
 
 export const __VERSION__ = packageJson.version
