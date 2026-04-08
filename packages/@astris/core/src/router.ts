@@ -1,4 +1,4 @@
-import type { MatchedRoute, RouteEntry } from '@astris/types'
+import type { MatchedRoute, RouteEntry } from './types'
 
 export class Router {
   private routes: RouteEntry[]

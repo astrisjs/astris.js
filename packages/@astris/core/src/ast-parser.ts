@@ -1,5 +1,5 @@
 import { readFile } from 'node:fs/promises'
-import type { ParsedRoute, TypeInfo } from '@astris/types'
+import type { ParsedRoute, TypeInfo } from './types'
 
 async function parseTypeDefinitions(filePath: string): Promise<TypeInfo[]> {
   const content = await readFile(filePath, 'utf-8')

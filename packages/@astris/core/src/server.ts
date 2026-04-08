@@ -1,5 +1,5 @@
-import type { ServerConfig } from '@astris/types'
 import { Router } from './router'
+import type { ServerConfig } from './types'
 
 export function createServer(config: ServerConfig) {
   const router = new Router(config.routes)

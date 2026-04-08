@@ -1,6 +1,6 @@
 import { readdir } from 'node:fs/promises'
 import { join, relative } from 'node:path'
-import type { ScanResult } from '@astris/types'
+import type { ScanResult } from './types'
 
 async function walkDirectory(dir: string): Promise<string[]> {
   const files: string[] = []

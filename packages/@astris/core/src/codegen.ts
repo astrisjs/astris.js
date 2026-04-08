@@ -1,4 +1,4 @@
-import type { CodegenResult, RouteEntry } from '@astris/types'
+import type { CodegenResult, RouteEntry } from './types'
 
 export function generateRoutesRegistry(routes: RouteEntry[]): CodegenResult {
   const warnings: string[] = []
