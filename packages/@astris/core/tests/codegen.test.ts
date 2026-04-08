@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'bun:test'
-import type { RouteEntry } from '@astris/types'
+import type { RouteEntry } from '../src'
 import { generateRoutesRegistry } from '../src/codegen'
 
 describe('Code generation', () => {
