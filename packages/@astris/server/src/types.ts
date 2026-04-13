@@ -4,7 +4,7 @@ export interface RequestContext {
   url: URL
   headers: Headers
   params: Record<string, string | string[]>
-  route?: RouteEntry[]
+  route?: RouteEntry
 }
 
 export interface ServerConfig {

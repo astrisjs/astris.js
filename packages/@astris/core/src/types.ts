@@ -40,9 +40,3 @@ export interface MatchedRoute {
   params: Record<string, string | string[]>
   isApi: boolean
 }
-
-export interface ServerConfig {
-  routes: RouteEntry[]
-  port: number
-  hostname: string
-}
