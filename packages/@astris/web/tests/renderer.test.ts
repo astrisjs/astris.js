@@ -28,11 +28,13 @@ describe('PageProps', () => {
 describe('BundleOptions', () => {
   it('accepts valid options', () => {
     const opts: BundleOptions = {
+      entrypoint: '.gen/client-entry.ts',
       outdir: './dist/client',
       watch: false,
       minify: true,
     }
     expect(opts.outdir).toBe('./dist/client')
+    expect(opts.entrypoint).toBe('.gen/client-entry.ts')
   })
 })
 

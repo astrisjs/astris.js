@@ -13,6 +13,7 @@ export interface PageProps {
 }
 
 export interface BundleOptions {
+  entrypoint: string
   outdir: string
   watch?: boolean
   minify?: boolean

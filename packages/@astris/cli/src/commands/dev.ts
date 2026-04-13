@@ -1,7 +1,7 @@
 // packages/@astris/cli/src/commands/dev.ts
 import { mkdir, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
-import { generateRoutesRegistry, scanRoutes } from '@astris/core'
+import { generateClientEntry, generateRoutesRegistry, scanRoutes } from '@astris/core'
 import { startDevServer } from '@astris/server'
 import { bundle, render } from '@astris/web'
 import type { DevCommandConfig } from '../type'
@@ -26,8 +26,10 @@ export async function startDev(config: DevCommandConfig) {
   consola.info('Scanning routes...')
   await runCodegen(routesDir, genDir)
 
+  const clientEntry = join(genDir, 'client-entry.ts')
+
   consola.info('Bundling client...')
-  bundle({ outdir: clientOutDir, watch: true, minify: false }).catch((err) => {
+  bundle({ entrypoint: clientEntry, outdir: clientOutDir, watch: true, minify: false }).catch((err) => {
     consola.error('Client bundle error:', err)
   })
 
@@ -70,6 +72,10 @@ export async function startDev(config: DevCommandConfig) {
 
 async function runCodegen(routesDir: string, genDir: string) {
   const result = await scanRoutes(routesDir)
-  const { content } = generateRoutesRegistry(result.routes)
-  await writeFile(join(genDir, 'routes.ts'), content)
+  const { content: routesContent } = generateRoutesRegistry(result.routes)
+  const { content: clientEntryContent } = generateClientEntry(result.routes)
+  await Promise.all([
+    writeFile(join(genDir, 'routes.ts'), routesContent),
+    writeFile(join(genDir, 'client-entry.ts'), clientEntryContent),
+  ])
 }
