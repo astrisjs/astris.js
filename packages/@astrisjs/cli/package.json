@@ -1,12 +1,8 @@
 {
   "name": "@astrisjs/cli",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "The command line interface to manage AstrisJS framework",
   "type": "module",
-  "private": false,
-  "publishConfig": {
-    "access": "public"
-  },
   "bin": {
     "astris": "./dist/astris"
   },
