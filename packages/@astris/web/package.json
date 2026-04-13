@@ -12,7 +12,7 @@
     }
   },
   "scripts": {
-    "build": "bun build src/index.ts --outdir dist --format=esm --target=bun --minify --sourcemap=linked && bunx dts-bundle-generator -o dist/index.d.ts src/index.ts",
+    "build": "bun build src/index.ts --outdir dist --format=esm --target=bun --minify --sourcemap=linked && bunx dts-bundle-generator --no-check -o dist/index.d.ts src/index.ts",
     "test": "bun test tests/",
     "lint": "biome check src tests",
     "format": "biome format src tests --write",

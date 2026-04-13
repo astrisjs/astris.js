@@ -67,6 +67,20 @@
         "@types/react-dom": "^19.2.3",
       },
     },
+    "test-app": {
+      "name": "astris-test-app",
+      "version": "0.0.0",
+      "dependencies": {
+        "@astris/web": "workspace:*",
+        "react": "^19.2.4",
+        "react-dom": "^19.2.4",
+      },
+      "devDependencies": {
+        "@types/bun": "^1",
+        "@types/react": "^19.2.14",
+        "@types/react-dom": "^19.2.3",
+      },
+    },
   },
   "packages": {
     "@astris/cli": ["@astris/cli@workspace:packages/@astris/cli"],
@@ -114,6 +128,8 @@
     "@types/react": ["@types/react@19.2.14", "", { "dependencies": { "csstype": "^3.2.2" } }, "sha512-ilcTH/UniCkMdtexkoCN0bI7pMcJDvmQFPvuPvmEaYA/NSfFTAgdUSLAoVjaRJm7+6PvcM+q1zYOwS4wTYMF9w=="],
 
     "@types/react-dom": ["@types/react-dom@19.2.3", "", { "peerDependencies": { "@types/react": "^19.2.0" } }, "sha512-jp2L/eY6fn+KgVVQAOqYItbF0VY/YApe5Mz2F0aykSO8gx31bYCZyvSeYxCHKvzHG5eZjc+zyaS5BrBWya2+kQ=="],
+
+    "astris-test-app": ["astris-test-app@workspace:test-app"],
 
     "bun-types": ["bun-types@1.3.11", "", { "dependencies": { "@types/node": "*" } }, "sha512-1KGPpoxQWl9f6wcZh57LvrPIInQMn2TQ7jsgxqpRzg+l0QPOFvJVH7HmvHo/AiPgwXy+/Thf6Ov3EdVn1vOabg=="],
 

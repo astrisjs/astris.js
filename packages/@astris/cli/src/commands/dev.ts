@@ -1,4 +1,3 @@
-// packages/@astris/cli/src/commands/dev.ts
 import { mkdir, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import { generateClientEntry, generateRoutesRegistry, scanRoutes } from '@astris/core'
@@ -8,12 +7,7 @@ import type { DevCommandConfig } from '../type'
 import consola from '../utils/consola'
 
 export async function startDev(config: DevCommandConfig) {
-  const {
-    projectRoot = process.cwd(),
-    port = 3000,
-    hostname = 'localhost',
-    open = true,
-  } = config
+  const { projectRoot = process.cwd(), port = 3000, hostname = 'localhost', open = true } = config
 
   const routesDir = join(projectRoot, 'src/routes')
   const publicDir = join(projectRoot, 'public')
@@ -29,9 +23,11 @@ export async function startDev(config: DevCommandConfig) {
   const clientEntry = join(genDir, 'client-entry.ts')
 
   consola.info('Bundling client...')
-  bundle({ entrypoint: clientEntry, outdir: clientOutDir, watch: true, minify: false }).catch((err) => {
-    consola.error('Client bundle error:', err)
-  })
+  bundle({ entrypoint: clientEntry, outdir: clientOutDir, watch: true, minify: false }).catch(
+    err => {
+      consola.error('Client bundle error:', err)
+    }
+  )
 
   consola.info('Starting dev server...')
   const server = await startDevServer({
@@ -39,11 +35,16 @@ export async function startDev(config: DevCommandConfig) {
     hostname,
     routesDir,
     publicDir,
-    renderer: async (ctx) => {
+    renderer: async ctx => {
       if (!ctx.route?.pageFile) {
-        return new ReadableStream({ start(c) { c.enqueue(new TextEncoder().encode('Not Found')); c.close() } })
+        return new ReadableStream({
+          start(c) {
+            c.enqueue(new TextEncoder().encode('Not Found'))
+            c.close()
+          },
+        })
       }
-      const mod = await import(ctx.route.pageFile) as { default: Parameters<typeof render>[0] }
+      const mod = (await import(ctx.route.pageFile)) as { default: Parameters<typeof render>[0] }
       return render(mod.default, ctx)
     },
   })
@@ -52,7 +53,12 @@ export async function startDev(config: DevCommandConfig) {
   consola.success(`Server running at ${url}`)
 
   if (open) {
-    Bun.spawn(['open', url], { stdout: 'ignore', stderr: 'ignore' })
+    const opener = process.platform === 'darwin' ? 'open' : 'xdg-open'
+    try {
+      Bun.spawn([opener, url], { stdout: 'ignore', stderr: 'ignore' })
+    } catch {
+      // Browser open is best-effort; failure is non-fatal
+    }
   }
 
   // Re-run codegen when route files change
