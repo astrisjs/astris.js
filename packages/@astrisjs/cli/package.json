@@ -30,9 +30,11 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@astris/core": "workspace:*",
-    "@astris/server": "workspace:*",
-    "@astris/web": "workspace:*"
+    "@astrisjs/core": "workspace:*",
+    "@astrisjs/server": "workspace:*",
+    "@astrisjs/web": "workspace:*",
+    "@clack/prompts": "^1.2.0",
+    "cac": "^7.0.0"
   },
   "devDependencies": {
     "@types/bun": "^1.1.0",
