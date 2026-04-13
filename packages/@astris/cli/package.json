@@ -1,0 +1,38 @@
+{
+  "name": "@astris/cli",
+  "version": "0.1.0",
+  "description": "The command line interface to manage AstrisJS framework",
+  "type": "module",
+  "bin": {
+    "astris": "./dist/astris"
+  },
+  "scripts": {
+    "build": "bun build src/index.ts --outfile=dist/astris --compile",
+    "lint": "biome check src tests",
+    "format": "biome format src tests --write",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "bun",
+    "fullstack",
+    "ssr",
+    "spa",
+    "framework"
+  ],
+  "author": {
+    "name": "Eric Freitas",
+    "email": "contato@freitaseric.com",
+    "url": "https://freitaseric.com"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@astris/core": "workspace:*",
+    "@astris/server": "workspace:*",
+    "@astris/web": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.1.0",
+    "@types/node": "^25.5.2",
+    "typescript": "^6.0.2"
+  }
+}
