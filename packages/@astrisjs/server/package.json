@@ -1,8 +1,12 @@
 {
-  "name": "@astris/web",
-  "version": "0.1.0",
-  "description": "React SSR and hydration layer for AstrisJS",
+  "name": "@astrisjs/server",
+  "version": "1.0.0",
+  "description": "Bun HTTP adapter for AstrisJS",
   "type": "module",
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
@@ -11,8 +15,11 @@
       "default": "./dist/index.js"
     }
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "build": "bun build src/index.ts --outdir dist --format=esm --target=bun --minify --sourcemap=linked && bunx dts-bundle-generator --no-check -o dist/index.d.ts src/index.ts",
+    "build": "bun build src/index.ts --outdir dist --format=esm --target=bun --minify --sourcemap=linked && bunx dts-bundle-generator -o dist/index.d.ts src/index.ts",
     "test": "bun test tests/",
     "lint": "biome check src tests",
     "format": "biome format src tests --write",
@@ -21,8 +28,8 @@
   "keywords": [
     "bun",
     "framework",
-    "react",
-    "ssr"
+    "server",
+    "http"
   ],
   "author": {
     "name": "Eric Freitas",
@@ -31,14 +38,10 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@astris/core": "workspace:*",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4"
+    "@astris/core": "workspace:*"
   },
   "devDependencies": {
     "@types/bun": "^1.1.0",
-    "@types/node": "^25.5.2",
-    "@types/react": "^19.2.14",
-    "@types/react-dom": "^19.2.3"
+    "@types/node": "^25.5.2"
   }
 }

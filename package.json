@@ -1,13 +1,12 @@
 {
   "name": "astrisjs",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "The fastest javascript framework for fullstack web applications that really need it.",
   "private": true,
   "type": "module",
   "workspaces": [
     "packages/**",
-    "!packages/**/test/*",
-    "test-app"
+    "!packages/**/test/*"
   ],
   "packageManager": "bun@1.3.9",
   "scripts": {
@@ -20,12 +19,13 @@
     "publish": "turbo run build && bun publish --workspaces --access public"
   },
   "devDependencies": {
+    "@astris/cli": "workspace:*",
     "@biomejs/biome": "^2.4.10",
+    "@changesets/cli": "^2.30.0",
     "@types/bun": "^1.3.11",
     "@types/node": "^25.5.2",
     "turbo": "^2.9.4",
-    "typescript": "^6.0.2",
-    "@astris/cli": "workspace:*"
+    "typescript": "^6.0.2"
   },
   "dependencies": {
     "consola": "^3.4.2"

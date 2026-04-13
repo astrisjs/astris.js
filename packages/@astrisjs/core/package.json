@@ -1,8 +1,12 @@
 {
-  "name": "@astris/core",
-  "version": "0.1.0",
+  "name": "@astrisjs/core",
+  "version": "1.0.0",
   "description": "Framework fullstack com SSR + SPA para Bun",
   "type": "module",
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
