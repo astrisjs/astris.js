@@ -1,0 +1,44 @@
+{
+  "name": "@astris/web",
+  "version": "0.1.0",
+  "description": "React SSR and hydration layer for AstrisJS",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "bun build src/index.ts --outdir dist --format=esm --target=bun --minify --sourcemap=linked && bunx dts-bundle-generator -o dist/index.d.ts src/index.ts",
+    "test": "bun test tests/",
+    "lint": "biome check src tests",
+    "format": "biome format src tests --write",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "bun",
+    "framework",
+    "react",
+    "ssr"
+  ],
+  "author": {
+    "name": "Eric Freitas",
+    "email": "contato@freitaseric.com",
+    "url": "https://freitaseric.com"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@astris/core": "workspace:*",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.1.0",
+    "@types/node": "^25.5.2",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3"
+  }
+}
