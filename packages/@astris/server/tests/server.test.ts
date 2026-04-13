@@ -1,7 +1,7 @@
 import { afterAll, beforeAll, describe, expect, it } from 'bun:test'
 import { mkdir, rm } from 'node:fs/promises'
 import { join } from 'node:path'
-import type { RequestContext, ServerConfig } from '../src'
+import { type RequestContext, type ServerConfig, startDevServer } from '../src'
 import { createServer } from '../src/server'
 
 const testRoutesDir = join(import.meta.dir, 'test-routes')
@@ -59,5 +59,18 @@ describe('createServer', () => {
     const res = await fetch(`http://localhost:${server.port}/nonexistent`)
     expect(res.status).toBe(404)
     server.stop(true)
+  })
+})
+
+describe('startDevServer', () => {
+  it('starts and reports a port, then stops cleanly', async () => {
+    const server = await startDevServer({
+      port: 0,
+      hostname: 'localhost',
+      routesDir: testRoutesDir,
+      publicDir: join(import.meta.dir, 'test-public'),
+    })
+    expect(server.port).toBeGreaterThan(0)
+    server.stop()
   })
 })
