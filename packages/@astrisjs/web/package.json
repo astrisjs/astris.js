@@ -1,6 +1,6 @@
 {
   "name": "@astrisjs/web",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "React SSR and hydration layer for AstrisJS",
   "type": "module",
   "main": "./dist/index.js",

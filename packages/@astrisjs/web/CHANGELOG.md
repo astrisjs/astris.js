@@ -1,4 +1,10 @@
-# @astris/web
+## 1.1.1
+
+### Patch Changes
+
+- 34a2495: trying to make it work
+- Updated dependencies [34a2495]
+  - @astrisjs/core@1.1.1
 
 ## 1.1.0
 

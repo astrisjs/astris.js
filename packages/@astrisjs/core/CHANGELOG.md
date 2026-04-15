@@ -1,5 +1,11 @@
 # @astris/core
 
+## 1.1.1
+
+### Patch Changes
+
+- 34a2495: trying to make it work
+
 ## 1.1.0
 
 ### Minor Changes
