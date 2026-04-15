@@ -1,5 +1,15 @@
 # @astris/cli
 
+## 1.1.2
+
+### Patch Changes
+
+- eff2dbb: agora vai
+- Updated dependencies [eff2dbb]
+  - @astrisjs/core@1.1.2
+  - @astrisjs/server@1.1.2
+  - @astrisjs/web@1.1.2
+
 ## 1.1.1
 
 ### Patch Changes

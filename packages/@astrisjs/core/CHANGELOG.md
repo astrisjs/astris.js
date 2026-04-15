@@ -1,5 +1,11 @@
 # @astris/core
 
+## 1.1.2
+
+### Patch Changes
+
+- eff2dbb: agora vai
+
 ## 1.1.1
 
 ### Patch Changes
