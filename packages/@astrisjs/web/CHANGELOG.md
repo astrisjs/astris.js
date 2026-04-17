@@ -1,3 +1,14 @@
+## 2.0.0
+
+### Major Changes
+
+- f64ada0: add dev command
+
+### Patch Changes
+
+- Updated dependencies [f64ada0]
+  - @astrisjs/core@2.0.0
+
 ## 1.1.2
 
 ### Patch Changes

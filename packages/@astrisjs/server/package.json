@@ -1,6 +1,6 @@
 {
   "name": "@astrisjs/server",
-  "version": "1.1.2",
+  "version": "2.0.0",
   "description": "Bun HTTP adapter for AstrisJS",
   "type": "module",
   "main": "./dist/index.js",
@@ -34,7 +34,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@astrisjs/core": "workspace:*"
+    "@astrisjs/core": "2.0.0"
   },
   "devDependencies": {
     "@types/bun": "^1.1.0",

@@ -1,5 +1,11 @@
 # @astris/core
 
+## 2.0.0
+
+### Major Changes
+
+- f64ada0: add dev command
+
 ## 1.1.2
 
 ### Patch Changes
