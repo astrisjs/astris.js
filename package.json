@@ -1,9 +1,7 @@
 {
   "name": "astrisjs",
-  "version": "0.1.0",
-  "description": "The fastest javascript framework for fullstack web applications that really need it.",
+  "version": "1.1.1",
   "private": true,
-  "type": "module",
   "workspaces": [
     "packages/**",
     "!packages/**/test/*",
@@ -17,7 +15,7 @@
     "lint": "turbo run lint",
     "format": "turbo run format",
     "clean": "turbo run clean && rm -rf node_modules packages/*/node_modules",
-    "publish": "turbo run build && bun publish --workspaces --access public"
+    "publish-packages": "turbo run build test && changeset version && bun scripts/resolve-workspace-deps.ts && changeset publish"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.4.10",

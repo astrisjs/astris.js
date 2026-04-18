@@ -1,55 +1,25 @@
 import { existsSync } from 'node:fs'
-import { mkdir, rm, writeFile } from 'node:fs/promises'
-import { join, resolve } from 'node:path'
-import { __VERSION__ } from '@astris/core'
-import type { InitCommandConfig } from '../type'
-import consola from '../utils/consola'
-
-function validateProjectName(name: string): boolean {
-  if (!name || name.trim() === '') {
-    consola.error('Project name is required')
-    return false
-  }
-
-  if (!/^[a-z0-9-]+$/.test(name)) {
-    consola.error('Project name must contain only lowercase letters, numbers, and hyphens')
-    return false
-  }
-
-  return true
+import { mkdir, readFile, rm, writeFile } from 'node:fs/promises'
+import { join } from 'node:path'
+import { __VERSION__ } from '@astrisjs/core'
+export interface InitCommandConfig {
+  readonly projectName: string
+  readonly projectPath: string
+  readonly templateUrl: URL
+  readonly installDependencies: boolean
 }
 
 export async function initApp(config: InitCommandConfig) {
-  const { projectName, templateUrl, packageManager, installDependencies } = config
-
-  if (!validateProjectName(projectName)) return
-
-  const projectPath = resolve(projectName)
-
-  consola.info(`Initializing a new project named: ${projectName}`)
-  consola.info(`Directory: ${projectPath}\n`)
+  const { projectName, projectPath, templateUrl, installDependencies } = config
 
   if (existsSync(projectPath)) {
-    const override = await consola.prompt(
-      `The directory ${projectPath} is not empty. Do you want to override?`,
-      {
-        type: 'confirm',
-      }
-    )
-
-    if (!override) {
-      consola.log('Cancelled.')
-      return
-    }
     await rm(projectPath, { force: true, recursive: true })
   }
 
   await mkdir(projectPath, { recursive: true })
 
-  consola.info(`Cloning template from ${templateUrl}`)
-
   const cloneProcess = Bun.spawn({
-    cmd: ['git', 'clone', templateUrl, projectPath],
+    cmd: ['git', 'clone', templateUrl.href, projectPath],
     stdout: 'ignore',
     stderr: 'pipe',
   })
@@ -57,43 +27,35 @@ export async function initApp(config: InitCommandConfig) {
   const cloneExitCode = await cloneProcess.exited
 
   if (cloneExitCode !== 0) {
-    consola.error(`Unable to clone template from: ${templateUrl}`)
-    consola.error('Make sure you have git installed and the URL is correct.')
     await rm(projectPath, { force: true, recursive: true })
-    return
+    throw new Error(
+      `Unable to clone template from: ${templateUrl}. Make sure you have git installed and the URL is correct.`
+    )
   }
 
   await rm(join(projectPath, '.git'), { force: true, recursive: true })
 
-  consola.success('Project directory created!')
+  const packageJsonPath = join(projectPath, 'package.json')
 
-  const packageJson = {
-    name: projectName,
-    version: '0.0.0',
-    type: 'module',
-    scripts: {
-      dev: 'astris dev',
-      build: 'astris build',
-      start: 'NODE_ENV=production astris start',
-      lint: 'biome lint src',
-      format: 'biome format src --write',
-    },
-    dependencies: {
-      '@astris/web': __VERSION__,
-    },
-    devDependencies: {
-      '@biomejs/biome': '^2.4.0',
-      '@types/bun': '^1',
-      typescript: '^6',
-    },
+  if (existsSync(packageJsonPath)) {
+    const rawPackage = await readFile(packageJsonPath, 'utf-8')
+    const parsedPackage = JSON.parse(rawPackage)
+
+    parsedPackage.name = projectName
+    parsedPackage.version = '0.0.0'
+
+    if (parsedPackage.dependencies?.['@astris/web']) {
+      parsedPackage.dependencies['@astris/web'] = __VERSION__
+    }
+
+    await writeFile(packageJsonPath, JSON.stringify(parsedPackage, null, 2))
+  } else {
+    throw new Error('Template is invalid: Missing package.json')
   }
 
-  await writeFile(join(projectPath, 'package.json'), JSON.stringify(packageJson, null, 2))
-
   if (installDependencies) {
-    consola.info(`Installing dependencies with ${packageManager}`)
     const installProcess = Bun.spawn({
-      cmd: [packageManager, 'install'],
+      cmd: ['bun', 'install'],
       cwd: projectPath,
       stdout: 'ignore',
       stderr: 'ignore',
@@ -101,30 +63,8 @@ export async function initApp(config: InitCommandConfig) {
 
     const installExitCode = await installProcess.exited
 
-    if (installExitCode === 0) {
-      consola.success('Dependencies successfully installed!')
-    } else {
-      consola.warn(`Unable to install dependencies with ${packageManager}`)
-      config.installDependencies = false
+    if (installExitCode !== 0) {
+      throw new Error('Unable to install dependencies with bun.')
     }
   }
-
-  consola.success('Your project has been initialized!')
-  consola.log('')
-  consola.log(`📦 Project: ${projectName}`)
-  consola.log(`📁 Location: ${projectPath}`)
-  consola.log(`🔧 Package manager: ${packageManager}`)
-  consola.log(`✨ Astris version: ${__VERSION__}`)
-  consola.log('')
-
-  const nextSteps = [
-    `cd ${projectName}`,
-    !config.installDependencies && `${packageManager} install`,
-    `${packageManager} run dev`,
-  ]
-    .filter(Boolean)
-    .join('\n ')
-
-  consola.box(`Next steps:\n\n ${nextSteps}`)
-  consola.log('💖 Thanks for using AstrisJS!')
 }
